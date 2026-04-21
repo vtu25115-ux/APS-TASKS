@@ -1,0 +1,22 @@
+class Solution{
+public boolean canFinish(int n,int[][] pre){
+List<List<Integer>> adj=new ArrayList<>();
+for(int i=0;i<n;i++)adj.add(new ArrayList<>());
+for(int[] p:pre)adj.get(p[1]).add(p[0]);
+int[] vis=new int[n];
+for(int i=0;i<n;i++){
+if(dfs(i,adj,vis))return false;
+}
+return true;
+}
+boolean dfs(int i,List<List<Integer>> adj,int[] vis){
+if(vis[i]==1)return true;
+if(vis[i]==2)return false;
+vis[i]=1;
+for(int nei:adj.get(i)){
+if(dfs(nei,adj,vis))return true;
+}
+vis[i]=2;
+return false;
+}
+}
